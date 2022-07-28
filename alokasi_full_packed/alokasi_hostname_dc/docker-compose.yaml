@@ -1,0 +1,11 @@
+version: '3.6'
+services:
+  alokasi_hostname:
+    image: gerardusordo/alokasi_hostname:1.0.0
+    restart: always
+    #volumes:
+    #- ./src:/usr/src/app/src
+    ports:
+    - "8082:3000"
+#volumes:
+#  src:

@@ -1,0 +1,23 @@
+-- the function to call when the trigger is invoked
+CREATE FUNCTION insert_vm_alloc_server()
+  RETURNS TRIGGER
+  LANGUAGE PLPGSQL AS $BODY$
+BEGIN
+  -- Create revision only if node's subject or body columns have changed
+  -- IF OLD.title <> NEW.title OR OLD."data" <> NEW."data" THEN
+    INSERT INTO vm_alloc_email_schedule (id_server, date, state)
+    VALUES (NEW.id, NEW.power_on_date, 0);
+    INSERT INTO vm_alloc_email_schedule (id_server, date, state)
+    VALUES (NEW.id, NEW.user_notif_date, 1);
+    INSERT INTO vm_alloc_email_schedule (id_server, date, state)
+    VALUES (NEW.id, NEW.power_off_date, 2);
+    INSERT INTO vm_alloc_email_schedule (id_server, date, state)
+    VALUES (NEW.id, NEW.delete_date, 3);
+  -- END IF;
+  -- Return the NEW record so that update can carry on as usual
+  RETURN NEW;
+END; $BODY$;
+
+-- create the trigger
+CREATE TRIGGER trigger_insert_vm_alloc_email_schedule
+  AFTER INSERT ON "vm_alloc"."server" FOR EACH ROW EXECUTE PROCEDURE insert_vm_alloc_server();

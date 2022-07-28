@@ -1,0 +1,19 @@
+  -- Create the function
+CREATE FUNCTION insert_schedule_email_when_insert_server()
+  RETURNS trigger AS $BODY$
+-- DECLARE active_account BOOLEAN;
+BEGIN
+ INSERT INTO vm_alloc.email_schedule (id_server, date, state)
+    VALUES (NEW.id, NEW.power_on_date, 0);
+    INSERT INTO vm_alloc.email_schedule (id_server, date, state)
+    VALUES (NEW.id, NEW.user_notif_date, 1);
+    INSERT INTO vm_alloc.email_schedule (id_server, date, state)
+    VALUES (NEW.id, NEW.power_off_date, 2);
+    INSERT INTO vm_alloc.email_schedule (id_server, date, state)
+    VALUES (NEW.id, NEW.delete_date, 3);
+ RETURN NEW;
+END;
+$BODY$ LANGUAGE plpgsql;
+
+--- Create the trigger with the above function
+CREATE TRIGGER insert_server_1 AFTER INSERT ON vm_alloc."server" FOR EACH ROW EXECUTE PROCEDURE insert_schedule_email_when_insert_server();

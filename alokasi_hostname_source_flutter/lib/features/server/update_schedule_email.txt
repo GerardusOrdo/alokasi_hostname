@@ -1,0 +1,27 @@
+-- Create the function
+CREATE FUNCTION update_schedule_email_when_update_server()
+  RETURNS trigger AS $BODY$
+-- DECLARE active_account BOOLEAN;
+BEGIN
+ UPDATE vm_alloc.email_schedule SET
+ date = NEW.power_on_date
+ WHERE id_server = NEW.id AND state = 0;
+ 
+ UPDATE vm_alloc.email_schedule SET
+ date = NEW.user_notif_date
+ WHERE id_server = NEW.id AND state = 1;
+ 
+ UPDATE vm_alloc.email_schedule SET
+ date = NEW.power_off_date
+ WHERE id_server = NEW.id AND state = 2;
+ 
+ UPDATE vm_alloc.email_schedule SET
+ date = NEW.delete_date
+ WHERE id_server = NEW.id AND state = 3;
+
+ RETURN NEW;
+END;
+$BODY$ LANGUAGE plpgsql;
+
+--- Create the trigger with the above function
+CREATE TRIGGER update_server_1 AFTER UPDATE ON vm_alloc."server" FOR EACH ROW EXECUTE PROCEDURE update_schedule_email_when_update_server();

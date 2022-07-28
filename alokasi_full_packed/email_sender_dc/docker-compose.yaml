@@ -1,0 +1,11 @@
+version: '3.6'
+services:
+  email_sender:
+    image: gerardusordo/email_sender:1.0.0
+    restart: always
+    #volumes:
+    #- ./src:/usr/src/app/src
+    ports:
+    - "8083:8080"
+#volumes:
+#  src:

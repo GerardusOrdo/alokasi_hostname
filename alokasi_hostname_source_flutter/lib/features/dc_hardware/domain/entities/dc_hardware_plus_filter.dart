@@ -1,0 +1,162 @@
+import '../../../../core/helper/helper.dart';
+import '../../../../core/template/master_data/domain/entities/master_data_filter.dart';
+import 'dc_hardware.dart';
+
+/// Class ini merupakan bayangan class entities, dimana ada tambahan property filter dari mixin MasterDataFilter.
+/// Class ini sebagai objek untuk filtering data dengan menggunakan property yang ada di class ini.
+
+class DcHardwarePlusFilter extends DcHardware with MasterDataFilter {
+  final String createdFrom;
+  final String createdTo;
+  @override
+  int offsets;
+  @override
+  int limits;
+  @override
+  String fieldToOrderBy;
+  @override
+  bool orderByAscending;
+  @override
+  bool selected;
+  @override
+  EnumLogicalOperator dataFilterByLogicalOperator;
+
+  DcHardwarePlusFilter({
+    int id,
+    int idOwner,
+    String owner,
+    int idDcRack,
+    String rackName,
+    int idBrand,
+    String brand,
+    int idHwModel,
+    String hwModel,
+    int frontbackFacing,
+    int idHwType,
+    String hwType,
+    int idMountedForm,
+    String mountedForm,
+    int hwConnectType,
+    bool isEnclosure,
+    int enclosureColumn,
+    int enclosureRow,
+    bool isBlade,
+    int idParent,
+    int xInEnclosure,
+    int yInEnclosure,
+    String hwName,
+    String sn,
+    int uHeight,
+    int uPosition,
+    int xPositionInRack,
+    int yPositionInRack,
+    int cpuCore,
+    int memoryGb,
+    int diskGb,
+    double watt,
+    double ampere,
+    int width,
+    int height,
+    bool isReserved,
+    bool requirePosition,
+    String image,
+    String notes,
+    bool deleted,
+    String create,
+    this.createdFrom,
+    this.createdTo,
+    this.offsets = 0,
+    this.limits = 100,
+    this.fieldToOrderBy = 'id',
+    this.orderByAscending = true,
+    this.selected = false,
+    this.dataFilterByLogicalOperator = EnumLogicalOperator.and,
+  }) : super(
+          id: id,
+          idOwner: idOwner,
+          owner: owner,
+          idDcRack: idDcRack,
+          rackName: rackName,
+          idBrand: idBrand,
+          brand: brand,
+          idHwModel: idHwModel,
+          hwModel: hwModel,
+          frontbackFacing: frontbackFacing,
+          idHwType: idHwType,
+          hwType: hwType,
+          idMountedForm: idMountedForm,
+          mountedForm: mountedForm,
+          hwConnectType: hwConnectType,
+          isEnclosure: isEnclosure,
+          enclosureColumn: enclosureColumn,
+          enclosureRow: enclosureRow,
+          isBlade: isBlade,
+          idParent: idParent,
+          xInEnclosure: xInEnclosure,
+          yInEnclosure: yInEnclosure,
+          hwName: hwName,
+          sn: sn,
+          uHeight: uHeight,
+          uPosition: uPosition,
+          xPositionInRack: xPositionInRack,
+          yPositionInRack: yPositionInRack,
+          cpuCore: cpuCore,
+          memoryGb: memoryGb,
+          diskGb: diskGb,
+          watt: watt,
+          ampere: ampere,
+          width: width,
+          height: height,
+          isReserved: isReserved,
+          requirePosition: requirePosition,
+          image: image,
+          notes: notes,
+          deleted: deleted,
+          create: create,
+        );
+
+  @override
+  List<Object> get props => [
+        id,
+        idOwner,
+        owner,
+        idDcRack,
+        rackName,
+        idBrand,
+        brand,
+        idHwModel,
+        hwModel,
+        frontbackFacing,
+        idHwType,
+        hwType,
+        idMountedForm,
+        mountedForm,
+        hwConnectType,
+        isEnclosure,
+        enclosureColumn,
+        enclosureRow,
+        isBlade,
+        idParent,
+        xInEnclosure,
+        yInEnclosure,
+        hwName,
+        sn,
+        uHeight,
+        uPosition,
+        xPositionInRack,
+        yPositionInRack,
+        cpuCore,
+        memoryGb,
+        diskGb,
+        watt,
+        ampere,
+        width,
+        height,
+        isReserved,
+        requirePosition,
+        image,
+        notes,
+        deleted,
+        create,
+      ];
+}
